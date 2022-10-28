@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+// Variables
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: Anton, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+}
+
+.done {
+  text-decoration: line-through;
+  color: green;
+}
