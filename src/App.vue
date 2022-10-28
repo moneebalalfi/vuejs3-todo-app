@@ -18,7 +18,9 @@ import TodoList from "./components/TodoList.vue";
 export default {
   name: "App",
   components: { CreateTodo, TodoList },
+
   setup() {
+    document.title = "Vuejs Todo App";
     const todoContent = ref("");
     const todos = ref([]);
 
