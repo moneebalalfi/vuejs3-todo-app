@@ -37,16 +37,23 @@
         </div>
       </div>
       <div class="todo-list-controls">
-        <!-- <h4>Pending 4</h4>
-        <button @click="markAllDone">All done</button> -->
-        <!-- To be refactored -->
+        <p>
+          Pending <span>{{ pendingTodos }}</span>
+        </p>
+        <button
+          class="set-all-done-btn"
+          v-if="pendingTodos !== 0"
+          @click="markAllDone"
+        >
+          Set All Done
+        </button>
       </div>
     </section>
   </main>
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 export default {
   name: "App",
@@ -56,6 +63,10 @@ export default {
     const todos = ref([]);
 
     const textareaRef = ref(null);
+
+    const pendingTodos = computed(() => {
+      return todos.value.filter((todo) => !todo.isDone).length;
+    });
 
     const addNewTodo = () => {
       if (todoContent.value === "") {
@@ -84,6 +95,7 @@ export default {
       removeTodo,
       markAllDone,
       textareaRef,
+      pendingTodos,
     };
   },
 };

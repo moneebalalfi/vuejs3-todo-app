@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 // Variables
 $dark: #1a202c;
 $white: #f7fafc;
@@ -49,7 +47,7 @@ main {
   header {
     h1 {
       letter-spacing: 0.5rem;
-      font-weight: bolder;
+      font-weight: 700;
     }
   }
 
@@ -150,6 +148,22 @@ main {
     }
 
     .todo-list-controls {
+      margin-top: 5rem;
+      display: flex;
+      font-weight: 100;
+      justify-content: space-between;
+      border-top: 1px solid $white;
+      padding-top: 2rem;
+
+      p span {
+        font-weight: 400;
+      }
+
+      .set-all-done-btn {
+        @include btn-styles;
+        background: $white;
+        color: $dark;
+      }
     }
   }
 }
