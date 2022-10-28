@@ -3,23 +3,43 @@
     <header>
       <h1>Vuejs3 Todo Application</h1>
     </header>
+
     <section class="create-todo">
       <form @submit.prevent="addNewTodo">
-        <label for="new-todo">New Todo</label>
-        <input id="new-todo" v-model="todoContent" />
-        <button>Add</button>
+        <div class="form-control">
+          <label for="new-todo">New Todo</label>
+          <textarea
+            id="new-todo"
+            placeholder="Exploring Vuejs .."
+            rows="3"
+            v-model.trim="todoContent"
+            ref="textareaRef"
+          />
+        </div>
+        <button class="add-btn">Add</button>
       </form>
-      <button @click="markAllDone">Mark all done</button>
     </section>
-    <section class="todo-list">
+
+    <section class="todo-list" v-if="todos.length > 0">
+      <h2 class="title">Todo List</h2>
       <div
         v-for="(todo, i) in todos"
         :key="todo.id"
-        @click="toggleTodoState(todo)"
+        class="todo-item"
         :class="{ done: todo.isDone }"
       >
-        <h3>{{ todo.content }}</h3>
-        <button @click="removeTodo(i)">Remove</button>
+        <h3 class="todo-content">{{ todo.content }}</h3>
+        <div class="todo-item-controls">
+          <button class="toggle-done-btn" @click="toggleTodoState(todo)">
+            Done {{ todo.isDone ? "✓" : "" }}
+          </button>
+          <button class="remove-btn" @click="removeTodo(i)">Remove</button>
+        </div>
+      </div>
+      <div class="todo-list-controls">
+        <!-- <h4>Pending 4</h4>
+        <button @click="markAllDone">All done</button> -->
+        <!-- To be refactored -->
       </div>
     </section>
   </main>
@@ -35,7 +55,14 @@ export default {
     const todoContent = ref("");
     const todos = ref([]);
 
+    const textareaRef = ref(null);
+
     const addNewTodo = () => {
+      if (todoContent.value === "") {
+        textareaRef.value.focus();
+        return;
+      }
+
       todos.value.push({
         id: 0,
         content: todoContent.value,
@@ -56,6 +83,7 @@ export default {
       toggleTodoState,
       removeTodo,
       markAllDone,
+      textareaRef,
     };
   },
 };
