@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, watch, computed } from "vue";
 
 export default {
   props: ["data"],
@@ -48,6 +48,16 @@ export default {
 
     const markAllDone = () =>
       todos.value.forEach((todo) => (todo.isDone = true));
+
+    watch(
+      todos,
+      (newVal) => {
+        localStorage.setItem("todos", JSON.stringify(newVal));
+      },
+      {
+        deep: true,
+      }
+    );
 
     return {
       todos,
