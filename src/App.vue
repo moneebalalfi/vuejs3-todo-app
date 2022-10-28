@@ -4,21 +4,7 @@
       <h1>Vuejs3 Todo Application</h1>
     </header>
 
-    <section class="create-todo">
-      <form @submit.prevent="addNewTodo">
-        <div class="form-control">
-          <label for="new-todo">New Todo</label>
-          <textarea
-            id="new-todo"
-            placeholder="Exploring Vuejs .."
-            rows="3"
-            v-model.trim="todoContent"
-            ref="textareaRef"
-          />
-        </div>
-        <button class="add-btn">Add</button>
-      </form>
-    </section>
+    <CreateTodo todoContent="todoContent" @onAddTodo="addNewTodo" />
 
     <section class="todo-list" v-if="todos.length > 0">
       <h2 class="title">Todo List</h2>
@@ -54,22 +40,23 @@
 
 <script>
 import { computed, ref } from "vue";
+import CreateTodo from "./components/CreateTodo.vue";
 
 export default {
   name: "App",
-  components: {},
+  components: { CreateTodo },
   setup() {
     const todoContent = ref("");
     const todos = ref([]);
-
-    const textareaRef = ref(null);
 
     const pendingTodos = computed(() => {
       return todos.value.filter((todo) => !todo.isDone).length;
     });
 
-    const addNewTodo = () => {
-      if (todoContent.value === "") {
+    function addNewTodo(data) {
+      const { textareaRef, todoContent } = data;
+
+      if (!todoContent.value || !textareaRef) {
         textareaRef.value.focus();
         return;
       }
@@ -80,7 +67,7 @@ export default {
         isDone: !true,
       });
       todoContent.value = "";
-    };
+    }
 
     const toggleTodoState = (todo) => (todo.isDone = !todo.isDone);
     const removeTodo = (index) => todos.value.splice(index, 1);
@@ -94,7 +81,7 @@ export default {
       toggleTodoState,
       removeTodo,
       markAllDone,
-      textareaRef,
+
       pendingTodos,
     };
   },
