@@ -1,4 +1,13 @@
-# todo-app
+```
+<template>
+  <note> My First Vuejs3 app 🤝</note>
+</tempalte>
+```
+
+# Vuejs 3 Basic Todo Application.
+
+- SCSS
+- LOCAL STORAGE
 
 ## Project setup
 ```
@@ -15,10 +24,4 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
