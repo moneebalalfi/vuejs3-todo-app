@@ -9,6 +9,9 @@
 - SCSS
 - LOCAL STORAGE
 
+## Review URL:
+https://vue3-todo-app-moneebalalfi.vercel.app/
+
 ## Project setup
 ```
 yarn install
